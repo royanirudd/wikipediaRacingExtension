@@ -1,10 +1,15 @@
-document.getElementById('startGame').addEventListener('click', () => {
-    chrome.runtime.sendMessage({action: "startGame"});
-});
+let actionButton = document.getElementById('actionButton');
+actionButton.addEventListener('click', handleActionButtonClick);
 
-document.getElementById('endGame').addEventListener('click', () => {
-    chrome.runtime.sendMessage({action: "endGame"});
-});
+function handleActionButtonClick() {
+    if (actionButton.textContent === 'Start Game') {
+        chrome.runtime.sendMessage({action: "startGame"});
+    } else if (actionButton.textContent === 'End Game') {
+        chrome.runtime.sendMessage({action: "endGame"});
+    } else if (actionButton.textContent === 'Play Again') {
+        chrome.runtime.sendMessage({action: "startGame"});
+    }
+}
 
 function updateStatus(message) {
     document.getElementById('gameStatus').textContent = message;
@@ -18,6 +23,16 @@ function updateClickCount(count) {
     document.getElementById('score').textContent = `Clicks: ${count}`;
 }
 
+function updateActionButton(state) {
+    if (state === 'start') {
+        actionButton.textContent = 'Start Game';
+    } else if (state === 'end') {
+        actionButton.textContent = 'End Game';
+    } else if (state === 'playAgain') {
+        actionButton.textContent = 'Play Again';
+    }
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "updateStatus") {
         updateStatus(request.message);
@@ -25,6 +40,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         updateTarget(request.title);
     } else if (request.action === "updateClickCount") {
         updateClickCount(request.count);
+    } else if (request.action === "gameStarted") {
+        updateActionButton('end');
+        updateStatus("Game in progress");
+    } else if (request.action === "gameEnded") {
+        updateStatus(request.message);
+        updateActionButton('playAgain');
     }
 });
 
@@ -34,7 +55,9 @@ chrome.runtime.sendMessage({action: "getGameState"}, (response) => {
         updateStatus("Game in progress");
         updateTarget(response.targetTitle);
         updateClickCount(response.clickCount);
+        updateActionButton('end');
     } else {
         updateStatus("No active game");
+        updateActionButton('start');
     }
 });

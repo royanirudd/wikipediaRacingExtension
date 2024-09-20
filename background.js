@@ -16,6 +16,7 @@ function startGame() {
     });
     
     updateStorage();
+    chrome.runtime.sendMessage({action: "gameStarted"});
 }
 
 function endGame(won = false) {
@@ -26,8 +27,22 @@ function endGame(won = false) {
         `Victory! You've reached ${targetTitle}. Time: ${duration.toFixed(2)}s, Clicks: ${clickCount}` :
         `Game ended. Time: ${duration.toFixed(2)}s, Clicks: ${clickCount}`;
     
-    chrome.runtime.sendMessage({action: "updateStatus", message: message});
     updateStorage();
+
+    chrome.windows.create({
+        url: chrome.extension.getURL("popup.html"),
+        type: "popup",
+        width: 400,
+        height: 300
+    }, (window) => {
+        setTimeout(() => {
+            chrome.runtime.sendMessage({
+                action: "gameEnded",
+                message: message,
+                won: won
+            });
+        }, 100);
+    });
 }
 
 function generateTargetArticle() {
