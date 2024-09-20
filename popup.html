@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Wikipedia Racing</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Player Wikigame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            padding: 10px;
+        }
+        button {
+            margin: 5px 0;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #gameStatus, #score {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #targetArticle {
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-    <h1>Wikipedia Racing</h1>
+    <h2>Single Player Wikigame</h2>
     <button id="startGame">Start New Game</button>
+    <button id="endGame">End Game</button>
+    <div id="gameStatus">No active game</div>
+    <div id="targetArticle"></div>
+    <div id="score"></div>
     <script src="popup.js"></script>
 </body>
 </html>
