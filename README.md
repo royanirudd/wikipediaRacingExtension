@@ -40,6 +40,7 @@ Single Player Wikigame is a Chrome extension that allows users to play the Wikip
 - Add anti-cheat with no Wikipedia searching allowed
 - Add hints, perhaps showing sites that are less than 3 clicks away
 - Keep a running cache so that from any page it is possible to say how many clicks away the target page is
+- Improve styling (CSS)
 
 ## Contributing
 
