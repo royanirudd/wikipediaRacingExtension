@@ -3,8 +3,50 @@
 <head>
     <title>Single Player Wikigame</title>
     <style>
-        body { width: 300px; padding: 10px; }
-        button { width: 100%; margin-top: 10px; }
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        #gameStatus {
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+        #targetArticle {
+            font-style: italic;
+        }
+        #score {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        #actionButton {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #actionButton:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
