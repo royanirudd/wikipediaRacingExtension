@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Wikipedia Racing",
+  "version": "1.0",
+  "description": "A game where you navigate from a random Wikipedia page to a goal page.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
