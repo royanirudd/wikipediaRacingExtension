@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Over</title>
+    <style>
+        body {
+            width: 380px;
+            height: 280px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        #message {
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+        #playAgainButton {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #playAgainButton:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Over</h1>
+    <p id="message"></p>
+    <button id="playAgainButton">Play Again</button>
+    <script src="endgame.js"></script>
+</body>
+</html>
