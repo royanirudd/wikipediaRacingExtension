@@ -39,7 +39,8 @@ function endGame(won = false) {
             chrome.runtime.sendMessage({
                 action: "gameEnded",
                 message: message,
-                won: won
+                won: won,
+                popupWindowId: window.id
             });
         }, 100);
     });
@@ -82,6 +83,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             clickCount: clickCount,
             targetTitle: targetTitle
         });
+    } else if (request.action === "playAgain") {
+        chrome.windows.remove(request.popupWindowId);
+        startGame();
+        chrome.browserAction.openPopup();
     }
 });
 
@@ -100,5 +105,16 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 chrome.tabs.onRemoved.addListener((tabId) => {
     if (tabId === gameTabId) {
         endGame();
+    }
+});
+
+chrome.windows.onFocusChanged.addListener((windowId) => {
+    if (windowId === chrome.windows.WINDOW_ID_NONE) {
+        chrome.windows.getAll({populate: true}, (windows) => {
+            let popupWindow = windows.find(w => w.type === 'popup' && w.tabs[0].url.includes('popup.html'));
+            if (popupWindow) {
+                chrome.windows.remove(popupWindow.id);
+            }
+        });
     }
 });

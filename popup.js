@@ -1,5 +1,6 @@
 let actionButton = document.getElementById('actionButton');
 actionButton.addEventListener('click', handleActionButtonClick);
+let popupWindowId = null;
 
 function handleActionButtonClick() {
     if (actionButton.textContent === 'Start Game') {
@@ -7,7 +8,7 @@ function handleActionButtonClick() {
     } else if (actionButton.textContent === 'End Game') {
         chrome.runtime.sendMessage({action: "endGame"});
     } else if (actionButton.textContent === 'Play Again') {
-        chrome.runtime.sendMessage({action: "startGame"});
+        chrome.runtime.sendMessage({action: "playAgain", popupWindowId: popupWindowId});
     }
 }
 
@@ -46,6 +47,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.action === "gameEnded") {
         updateStatus(request.message);
         updateActionButton('playAgain');
+        popupWindowId = request.popupWindowId;
     }
 });
 

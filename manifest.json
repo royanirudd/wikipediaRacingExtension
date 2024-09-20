@@ -2,22 +2,22 @@
   "manifest_version": 2,
   "name": "Single Player Wikigame",
   "version": "1.0",
-  "description": "Play Wikiracing on Wikipedia by yourself!",
+  "description": "Wikiracing",
   "permissions": [
     "activeTab",
     "storage",
     "https://*.wikipedia.org/*",
     "tabs",
-    "webNavigation"
+    "webNavigation",
+    "windows"
   ],
   "background": {
     "scripts": ["background.js"],
-    "persistent": true
+    "persistent": false 
   },
   "content_scripts": [
     {
-      "matches": ["https://*.wikipedia.org/*"],
-      "js": ["content.js"]
+      "matches": ["https://*.wikipedia.org/*"]
     }
   ],
   "browser_action": {
